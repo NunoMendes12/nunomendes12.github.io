@@ -24,6 +24,37 @@
       position: fixed;
       width: 100%;
     }
+
+    .logo-container {
+      position: fixed;
+      top: 0;
+    }
+
+    img {
+      --a: 8deg; /* control the angle of rotation (the smaller, the better) */
+
+      border-radius: 20px;
+      transform: perspective(400px) rotate3d(var(--r,1,-1),0,calc(var(--i,1)*var(--a)));
+
+      transition: .4s;
+      cursor: pointer;
+    }
+    .alt {
+      --r: 1,1;
+    }
+    img:hover {
+      --i: -5;
+      -webkit-mask-position: 0 0;
+    }
+    .alt:hover {
+      -webkit-mask-position: 100% 0;
+    }
+
+    /* Image styling */
+    .log-image {
+      width: 40vw; /* Adjust the width as needed */
+      height: auto; /* Maintain aspect ratio */
+    }
   </style>
 
 </head>
@@ -31,31 +62,16 @@
 <div class="main-container">
 <div id="image-container"> </div>
 </div>
-<script>
-  /*
-  const panorama = new PANOLENS.ImagePanorama( 'img/universe.jpg' );
-  const imageContainer = document.querySelector(".image-container");
-  const viewer = new PANOLENS.Viewer({
-    container: imageContainer,
-    autoRotate: true,
-    autoRotateSpeed: 0.5,
-    controlBar: false,
-    horizontalView: true,
-    cameraFov: 80,
-    autoHideInfospot: false,
-    output: 'console',
-    autoRotateActivationDuration: 10000 //milliseconds
-  });
 
-  viewer.OrbitControls.noZoom = true;
-  viewer.OrbitControls.noPan = true;
-  viewer.OrbitControls.noRotate = false;
-  viewer.DeviceOrientationControls.disconnect();
-  viewer.add(panorama);*/
+<div class="logo-container">
+  <img class="log-image" src="img/KrimwellLogo.png" alt="Corner Image">
+</div>
+<script>
 
   // Panorama Image URL
   const panoramaImageURL = 'img/universe.jpg';
   const planetImageURL = 'img/earth.png';
+  const logo = 'img/KrimwellLogo.png';
 
   // Create panorama viewer
   const panorama = new PANOLENS.ImagePanorama(panoramaImageURL);
@@ -64,21 +80,20 @@
   const container = document.getElementById('image-container');
   container.append(panorama.container);
 
-
   // Viewer setup
   const viewer = new PANOLENS.Viewer({ container: container,
     autoRotate: true,
     autoRotateSpeed: 0.5,
-    controlBar: false,
+    controlBar: true,
     horizontalView: true,
-    cameraFov: 300,
+    cameraFov: 500,
     autoHideInfospot: false,
     output: 'console',
     autoRotateActivationDuration: 10000 //milliseconds
   });
 
   // Add zoom points (example)
-  const point1 = new PANOLENS.Infospot(350, planetImageURL);
+  const point1 = new PANOLENS.Infospot(500, planetImageURL);
   point1.position.set(5000, 0, -1000);
   point1.addHoverText('Zoom Point 1');
 
@@ -87,20 +102,21 @@
     console.log("Zomm 100");
     viewer.getCamera().fov = 30;
     viewer.getCamera().updateProjectionMatrix();
-
   });
-
-
-
 
   const point2 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
   point2.position.set(-5000, 0, -1000);
   point2.addHoverText('Zoom Point 2');
   panorama.add(point2);
 
+  const point3 = new PANOLENS.Infospot(2000, logo );
+  point3.position.set(592.03, 3629.57, -3378.07);
+  point3.addHoverText('Zoom Point 2');
+  panorama.add(point3);
 
   panorama.add(point1);
   viewer.add(panorama);
+
 </script>
 
 </body>
