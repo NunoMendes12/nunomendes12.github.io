@@ -55,6 +55,50 @@
       width: 40vw; /* Adjust the width as needed */
       height: auto; /* Maintain aspect ratio */
     }
+
+    #earth{
+      background-color: #f0f0f0;
+      cursor: default;
+      width: 35vw;
+      border-radius: 3px;
+      display: inline-block;
+      z-index: 120;
+
+      align-items: center;
+      border-radius: 5px;
+      padding: 0.5rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #taskbar {
+      background-color: #1c1c1c;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+
   </style>
 
 </head>
@@ -66,6 +110,19 @@
 <div class="logo-container">
   <img class="log-image" src="img/KrimwellLogo.png" alt="Corner Image">
 </div>
+
+<div style="display: none; " id="earth">
+  <a href="https://www.example.com" class="button-link">Visit Example.com</a>
+</body>
+
+</div>
+
+<div id="taskbar">
+  <button id="zoomInBtn">Zoom In</button>
+  <button id="zoomOutBtn">Zoom Out</button>
+</div>
+
+
 <script>
 
   // Panorama Image URL
@@ -75,6 +132,7 @@
 
   // Create panorama viewer
   const panorama = new PANOLENS.ImagePanorama(panoramaImageURL);
+  const earth = document.getElementById('earth');
 
   // Add panorama to the container
   const container = document.getElementById('image-container');
@@ -93,29 +151,42 @@
   });
 
   // Add zoom points (example)
-  const point1 = new PANOLENS.Infospot(500, planetImageURL);
+  const point1 = new PANOLENS.Infospot(1000, planetImageURL);
   point1.position.set(5000, 0, -1000);
   point1.addHoverText('Zoom Point 1');
+
 
   point1.addEventListener('click', function () {
     // Zoom in on click
     console.log("Zomm 100");
-    viewer.getCamera().fov = 30;
-    viewer.getCamera().updateProjectionMatrix();
+    /*viewer.getCamera().fov = 30;
+    viewer.getCamera().updateProjectionMatrix();*/
+    earth.style.display = 'block';
+
   });
 
-  const point2 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
-  point2.position.set(-5000, 0, -1000);
+  const point2 = new PANOLENS.Infospot(1500, './img/mars.png');
+  point2.position.set(861.90, 109.97, -4914.51);
   point2.addHoverText('Zoom Point 2');
   panorama.add(point2);
 
-  const point3 = new PANOLENS.Infospot(2000, logo );
-  point3.position.set(592.03, 3629.57, -3378.07);
-  point3.addHoverText('Zoom Point 2');
-  panorama.add(point3);
+
 
   panorama.add(point1);
   viewer.add(panorama);
+
+  const zoomInBtn = document.getElementById('zoomInBtn');
+  const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+  zoomInBtn.addEventListener('click', () => {
+    viewer.control.dollyIn(4); // You can adjust the factor (2 in this case) for the zoom in
+  });
+
+  zoomOutBtn.addEventListener('click', () => {
+    viewer.control.dollyOut(4); // You can adjust the factor (2 in this case) for the zoom out
+    viewer.animate()
+  });
+
 
 </script>
 
