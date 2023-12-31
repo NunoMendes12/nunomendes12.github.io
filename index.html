@@ -8,7 +8,7 @@
   <script src="js/panolens.min.js"></script>
   <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
   
-<script type="module" src="js/main.js"></script>
+
 
 
   <style>
@@ -115,6 +115,16 @@
 </head>
 <body  style="margin: 0; overflow: hidden;">
 
+  <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.144.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.144.0/examples/jsm/",
+            "three/addons/controls/": "https://unpkg.com/three@0.144.0/examples/jsm/controls/"
+        }
+    }
+    </script>
+
 
 <div class="main-container">
 <div id="image-container"> </div>
@@ -202,6 +212,8 @@
 
 
 </script>
+
+<script type="module" src="js/main.js"></script>
 
 </body>
 </html>
