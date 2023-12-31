@@ -7,7 +7,6 @@ let scene, camera, renderer, hlight, directionalLight, light, light2, light3, li
 
 scene = new THREE.Scene();
 let logoCont = document.getElementById("logo");
-scene.background = new THREE.Color(0xdddddd);
 
 camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight,1000,10000);
 camera.rotation.y = 45/180*Math.PI;
@@ -37,8 +36,9 @@ light4.position.set(-500,300,0);
 scene.add(light4);
 
 
-renderer = new THREE.WebGLRenderer({antialias:true});
-renderer.setSize(window.innerWidth/3, window.innerHeight/3);
+renderer = new THREE.WebGLRenderer({alpha:true});
+
+renderer.setSize(window.innerWidth/3.5, window.innerHeight/3.5);
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.addEventListener('change', renderer);
 
