@@ -1,3 +1,57 @@
+var ROTATION_POSITION = 0.2;
+var ROTATION_SPEED = 150;
+const arrowButtonId = document.getElementById('arrowButton');
+const arrowButtonId2 = document.getElementById('arrowButton2');
+
+
+function rotateScene(targetRotation) {
+  var currentRotation = panorama.rotation.y;
+
+  // Create a Tween for smooth animation
+  new TWEEN.Tween({ rotation: currentRotation })
+    .to({ rotation: targetRotation }, 3000) // Adjust the duration as needed
+    .onUpdate(function (obj) {
+      panorama.rotation.y = obj.rotation;
+    })
+    .easing(TWEEN.Easing.Quadratic.Out) // You can try different easing functions
+    .start();
+
+    animate();
+}
+
+// Animate the scene
+function animate() {
+  requestAnimationFrame(animate);
+  TWEEN.update(); // Update the Tween library
+}
+
+
+
+function RotateLeftRigth(param) /* 0 - right, 1 - left */{
+    let go = ROTATION_POSITION;
+    let back = - ROTATION_POSITION;
+    let pos  = param < 1 ? go : back;
+    let easing = {val : pos};
+    let tween = new TWEEN.Tween(easing) 
+        .to({val: 0}, ROTATION_SPEED) 
+        .easing(TWEEN.Easing.Quadratic.InOut) 
+        .onUpdate(function() { 
+            viewer.OrbitControls.rotateLeft(easing.val)
+    }).start();
+}
+
+arrowButtonId.addEventListener('click', function(){
+  rotateScene(-Math.PI / 4); // Rotate right by 45 degrees
+});
+
+
+arrowButtonId2.addEventListener('click', function(){
+  rotateScene(Math.PI / 4); // Rotate right by 45 degrees
+})
+
+
+
+  
   // Panorama Image URL
   const panoramaImageURL = 'img/universeBlack3.jpg';
   const planetImageURL = 'img/earth.png';
@@ -21,8 +75,7 @@
 
   // Viewer setup
   const viewer = new PANOLENS.Viewer({ container: container,
-    autoRotate: true,
-    autoRotateSpeed: 0.2,
+
     controlBar: true,
     horizontalView: true,
     cameraFov: 500,
@@ -65,4 +118,9 @@
   zoomOutBtn.addEventListener('click', () => {
     viewer.control.dollyOut(4); // You can adjust the factor (2 in this case) for the zoom out
     viewer.animate()
+
+    
   });
+
+
+
