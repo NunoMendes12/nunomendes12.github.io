@@ -9,7 +9,7 @@ function rotateScene(targetRotation) {
 
   // Create a Tween for smooth animation
   new TWEEN.Tween({ rotation: currentRotation })
-    .to({ rotation: targetRotation }, 3000) // Adjust the duration as needed
+    .to({ rotation: targetRotation }, 2000) // Adjust the duration as needed
     .onUpdate(function (obj) {
       panorama.rotation.y = obj.rotation;
     })
@@ -54,9 +54,12 @@ arrowButtonId2.addEventListener('click', function(){
   
   // Panorama Image URL
   const panoramaImageURL = 'img/universeBlack3.jpg';
+
   const planetImageURL = 'img/earth.png';
   const logo = 'img/KrimwellLogo.png';
   const overlay = document.getElementById('overlay');
+  const panorama2 = new PANOLENS.ImagePanorama( 'img/the-universe.jpg' );
+
 
 
 
@@ -84,6 +87,7 @@ arrowButtonId2.addEventListener('click', function(){
     autoRotateActivationDuration: 10000 //milliseconds
   });
 
+
   // Add zoom points (example)
   const point1 = new PANOLENS.Infospot(3000, planetImageURL);
   point1.position.set(5000, 0, -1000);
@@ -93,10 +97,12 @@ arrowButtonId2.addEventListener('click', function(){
   point1.addEventListener('click', function () {
     // Zoom in on click
     console.log("Zomm 100");
-    /*viewer.getCamera().fov = 30;
-    viewer.getCamera().updateProjectionMatrix();*/
-    modal.style.display = 'block';
-    overlay.style.display = 'block';
+    //viewer.getCamera().fov = 30;
+  //viewer.getCamera().updateProjectionMatrix();
+    viewer.tweenControlCenter(new THREE.Vector3(0, 0, 3000), 2000);
+
+    //modal.style.display = 'block';
+    //overlay.style.display = 'block';
 
   });
 
@@ -107,6 +113,7 @@ arrowButtonId2.addEventListener('click', function(){
 
   panorama.add(point1);
   viewer.add(panorama);
+  viewer.add(panorama2);
 
   const zoomInBtn = document.getElementById('zoomInBtn');
   const zoomOutBtn = document.getElementById('zoomOutBtn');
@@ -119,8 +126,40 @@ arrowButtonId2.addEventListener('click', function(){
     viewer.control.dollyOut(4); // You can adjust the factor (2 in this case) for the zoom out
     viewer.animate()
 
+
     
   });
+
+  panorama.link( panorama2, new THREE.Vector3( 4092.23, -275.84, 2846.46 ) );
+  panorama2.link( panorama, new THREE.Vector3( -3429.01, 1205.85, -3421.88 ) );
+
+
+  
+/*
+  var panorama1, panorama2, viewer;
+
+  panorama1 = new PANOLENS.GoogleStreetviewPanorama( 'y0rbkep4RBcAAAQqZe0GiQ' );
+
+  panorama2 = new PANOLENS.ImagePanorama( 'asset/textures/equirectangular/field.jpg' );
+
+  panorama3 = new PANOLENS.VideoPanorama( 'asset/textures/video/1941-battle-low.mp4' );
+
+  viewer = new PANOLENS.Viewer();
+  viewer.add( panorama1 );
+  viewer.add( panorama2 );
+  viewer.add( panorama3 );
+
+  // Linking between panoramas
+  
+  // Pair
+  panorama1.link( panorama2, new THREE.Vector3( -3145.23, -3704.40, 1149.48 ) );
+  panorama2.link( panorama1, new THREE.Vector3( -3429.01, 1205.85, -3421.88 ) );
+
+  // Pair with custom scale and image
+  panorama1.link( panorama3, new THREE.Vector3( -1106.42, -4277.19, -5000.00 ), 400, 'asset/textures/1941-battle-thumb.png' );
+  panorama3.link( panorama2, new THREE.Vector3( 2092.2, -159.02, -4530.91 ) );
+*/
+
 
 
 
