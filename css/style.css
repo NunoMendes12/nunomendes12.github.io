@@ -168,7 +168,7 @@
   position: absolute;
   float: left;
   padding: 10px;
-  top: 25vw;
+  top: 50vh;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -282,3 +282,9 @@
   background-color: #017A4F;
   color: #fff;
 }
+
+@media all and (max-width:30em){
+    #arrow-container{
+      padding: 0;
+    }
+  }
