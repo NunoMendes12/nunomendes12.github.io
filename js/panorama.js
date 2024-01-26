@@ -58,7 +58,7 @@ arrowButtonId2.addEventListener('click', function(){
   const planetImageURL = 'img/earth.png';
   const logo = 'img/KrimwellLogo.png';
   const overlay = document.getElementById('overlay');
-  const panorama2 = new PANOLENS.ImagePanorama( 'img/the-universe.jpg' );
+  const panorama2 = new PANOLENS.ImagePanorama( 'img/displayCase.jpg' );
 
 
 
@@ -91,7 +91,7 @@ arrowButtonId2.addEventListener('click', function(){
   // Add zoom points (example)
   const point1 = new PANOLENS.Infospot(3000, planetImageURL);
   point1.position.set(5000, 0, -1000);
-  point1.addHoverText('Zoom Point 1');
+  point1.addHoverText('To our 3D World');
 
 
   point1.addEventListener('click', function () {
@@ -100,7 +100,8 @@ arrowButtonId2.addEventListener('click', function(){
     //viewer.getCamera().fov = 30;
   //viewer.getCamera().updateProjectionMatrix();
     viewer.tweenControlCenter(new THREE.Vector3(0, 0, 3000), 2000);
-
+      const url = "/environment.html";
+        window.location = url;
     //modal.style.display = 'block';
     //overlay.style.display = 'block';
 
@@ -115,7 +116,7 @@ arrowButtonId2.addEventListener('click', function(){
   viewer.add(panorama);
   viewer.add(panorama2);
 
-  const zoomInBtn = document.getElementById('zoomInBtn');
+  /*const zoomInBtn = document.getElementById('zoomInBtn');
   const zoomOutBtn = document.getElementById('zoomOutBtn');
 
   zoomInBtn.addEventListener('click', () => {
@@ -125,12 +126,9 @@ arrowButtonId2.addEventListener('click', function(){
   zoomOutBtn.addEventListener('click', () => {
     viewer.control.dollyOut(4); // You can adjust the factor (2 in this case) for the zoom out
     viewer.animate()
+  });*/
 
-
-    
-  });
-
-  panorama.link( panorama2, new THREE.Vector3( 4092.23, -275.84, 2846.46 ) );
+  panorama.link( panorama2, new THREE.Vector3( 4092.23, -275.84, 2846.46 ), 1000 );
   panorama2.link( panorama, new THREE.Vector3( -3429.01, 1205.85, -3421.88 ) );
 
 
