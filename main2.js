@@ -112,6 +112,8 @@ loader.load('bottle.gltf', function (gltf){
    scene.add(mesh);
 });*/
 
+
+
 const loader = new GLTFLoader().setPath('3DModel/');
 loader.load('bottle.gltf', function (gltf) {
   gltf.scene.traverse(function (child) {
@@ -135,6 +137,7 @@ loader.load('bottle.gltf', function (gltf) {
 }, (xhr) => xhr, (err) => console.error(err));
 
 
+
 document.addEventListener('click', onClick);
 
 
@@ -156,6 +159,6 @@ function onClick(event) {
         var clickedObject = intersects[0].object;
 
         // Display information (you can modify this part)
-        document.getElementById('info').style.display = "block";
+        document.getElementById('earth').style.display = "block";
     }
 }

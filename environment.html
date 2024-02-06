@@ -4,7 +4,8 @@
 		<title>three.js - pointerlock controls</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        
+		<link rel="stylesheet" href = "css/style.css"> 
+
         <script type="importmap">
             {
               "imports": {
@@ -26,8 +27,19 @@
 		</style>
 	</head>
 	<body>
-		<div style="display: none;" id="info">Click on the model to see information</div>
-
+		<div id="earth">
+			<button onclick="CloseModal()" id="close" href="#modal-closed" class="link-2"></button>
+		  
+			<h2>The Book Title</h2>
+			<p>Author: Author Name</p>
+			<p>Genre: Fiction</p>
+			<p>Published Year: 2023</p>
+			<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum metus ac efficitur tincidunt.</p>
+		  
+			<a style="color: white;" href="https://www.krimwell.pt/book" target="_blank">
+			  <button class="modal__btn" >See our Book!</button>
+			</a>
+		  </div>
 	
 		<script src="js/main2.js" type="module"></script>
 	</body>
