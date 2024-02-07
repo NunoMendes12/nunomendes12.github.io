@@ -128,7 +128,7 @@ loader.load('bottle.gltf', function (gltf) {
         l.shadow.mapSize.height = 2048;
     }
   });
-  gltf.scene.scale.set(10, 10, 10); // scale the object
+  gltf.scene.scale.set(50, 50, 50); // scale the object
   gltf.name = 'Bottle'; 
   scene.add(gltf.scene); // add the object's scene to the main scene
   render(); // render the scene
