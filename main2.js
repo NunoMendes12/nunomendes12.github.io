@@ -42,10 +42,21 @@ function init() {
     controls.maxPolarAngle = Math.PI / 2;
 
     // world
+
     const geometry = new THREE.ConeGeometry( 10, 30, 4, 1 );
     const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
+    for ( let i = 0; i < 500; i ++ ) {
 
+        const mesh = new THREE.Mesh( geometry, material );
+        mesh.position.x = Math.random() * 1600 - 800;
+        mesh.position.y = 0;
+        mesh.position.z = Math.random() * 1600 - 800;
+        mesh.updateMatrix();
+        mesh.matrixAutoUpdate = false;
+        scene.add( mesh );
+
+    }
 
     // lights
 
@@ -101,13 +112,14 @@ loader.load('bottle.gltf', function (gltf){
    scene.add(mesh);
 });*/
 
+
+
 const loader = new GLTFLoader().setPath('3DModel/');
 loader.load('bottle.gltf', function (gltf) {
   gltf.scene.traverse(function (child) {
 
     if (child.isMesh) {
       child.geometry.center(); // center the mesh
-      child.position.set(10,10,10);
     }
 
     if (child.isLight) {
@@ -118,8 +130,7 @@ loader.load('bottle.gltf', function (gltf) {
         l.shadow.mapSize.height = 2048;
     }
   });
-  gltf.scene.scale.set(50, 50, 50); // scale the object
-  
+  gltf.scene.scale.set(10, 10, 10); // scale the object
   gltf.name = 'Bottle'; 
   scene.add(gltf.scene); // add the object's scene to the main scene
   render(); // render the scene
