@@ -43,7 +43,6 @@ function init() {
 
     // world
 
-    const geometry = new THREE.ConeGeometry( 10, 30, 4, 1 );
     const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
     for ( let i = 0; i < 500; i ++ ) {
