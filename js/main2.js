@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
 
 let camera, controls, scene, renderer;
 
@@ -109,3 +111,52 @@ loader.load('bottle.gltf', function (gltf){
 
    scene.add(mesh);
 });*/
+
+const loader = new GLTFLoader().setPath('3DModel/');
+loader.load('bottle.gltf', function (gltf) {
+  gltf.scene.traverse(function (child) {
+
+    if (child.isMesh) {
+      child.geometry.center(); // center the mesh
+    }
+
+    if (child.isLight) {
+        let l = child;
+        l.castShadow = true;
+        l.shadow.bias = -0.003;
+        l.shadow.mapSize.width = 2048;
+        l.shadow.mapSize.height = 2048;
+    }
+  });
+  gltf.scene.scale.set(10, 10, 10); // scale the object
+  gltf.name = 'Bottle'; 
+  scene.add(gltf.scene); // add the object's scene to the main scene
+  render(); // render the scene
+}, (xhr) => xhr, (err) => console.error(err));
+
+
+
+document.addEventListener('click', onClick);
+
+
+function onClick(event) {
+    // Calculate mouse position in normalized device coordinates (-1 to +1)
+    var mouse = new THREE.Vector2();
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Raycasting
+    var raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
+
+    // Check for intersections
+    var intersects = raycaster.intersectObjects(scene.children, true);
+
+    if (intersects.length > 0) {
+        // Object clicked
+        var clickedObject = intersects[0].object;
+
+        // Display information (you can modify this part)
+        document.getElementById('earth').style.display = "block";
+    }
+}
