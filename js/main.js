@@ -5,7 +5,7 @@ let scene, camera, renderer, hlight, directionalLight, light, light2, light3, li
 scene = new THREE.Scene();
 let logoCont = document.getElementById("logo");
 
-camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight,1000,10000);
+camera = new THREE.PerspectiveCamera(30, window.innerWidth/window.innerHeight,1000,10000);
 camera.rotation.y = 45/180*Math.PI;
 camera.position.x = 800;
 camera.position.y = 100;

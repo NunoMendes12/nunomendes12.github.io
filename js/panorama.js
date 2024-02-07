@@ -91,7 +91,7 @@ arrowButtonId2.addEventListener('click', function(){
   // Add zoom points (example)
   const point1 = new PANOLENS.Infospot(3000, planetImageURL);
   point1.position.set(5000, 0, -1000);
-  point1.addHoverText('To our 3D World');
+  point1.addHoverText('Click to see our perfumes');
 
 
   point1.addEventListener('click', function () {

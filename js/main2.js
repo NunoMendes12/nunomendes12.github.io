@@ -6,11 +6,21 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 let camera, controls, scene, renderer;
 
+var loadingManager = new THREE.LoadingManager();
+loadingManager.onProgress = function(item, loaded, total) {
+    console.log(item, loaded, total);
+    // Update loading progress on the loading screen
+    document.getElementById('loading-screen').innerText = 'Loading ' + (loaded / total * 100).toFixed(2) + '%';
+};
+
 init();
 //render(); // remove when using next line for animation loop (requestAnimationFrame)
 animate();
 
+
+
 function init() {
+
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xcccccc );
@@ -18,7 +28,7 @@ function init() {
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( window.innerWidth/1.1, window.innerHeight/1.1 );
     document.body.appendChild( renderer.domElement );
 
     camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -108,6 +118,32 @@ loader.load('bottle.gltf', function (gltf) {
     if (child.isMesh) {
       child.geometry.center(); // center the mesh
       child.position.set(10,10,10);
+    }
+
+    if (child.isLight) {
+        let l = child;
+        l.castShadow = true;
+        l.shadow.bias = -0.003;
+        l.shadow.mapSize.width = 2048;
+        l.shadow.mapSize.height = 2048;
+    }
+  });
+  gltf.scene.scale.set(50, 50, 50); // scale the object
+  
+  gltf.name = 'Bottle'; 
+  scene.add(gltf.scene); // add the object's scene to the main scene
+          document.getElementById('loading-screen').style.display = 'none';
+
+  render(); // render the scene
+}, (xhr) => xhr, (err) => console.error(err));
+
+const loader2 = new GLTFLoader().setPath('Bottle2/');
+loader2.load('bottle2.gltf', function (gltf) {
+  gltf.scene.traverse(function (child) {
+
+    if (child.isMesh) {
+      child.geometry.center(); // center the mesh
+      child.position.set(1,3,3);
     }
 
     if (child.isLight) {

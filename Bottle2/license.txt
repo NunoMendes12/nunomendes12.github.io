@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fancy Perfume Bottle
+* source:	https://sketchfab.com/3d-models/fancy-perfume-bottle-bde185bddefc4016b13021da5d1269ec
+* author:	Jamie McFarlane (https://sketchfab.com/jamiemcfarlane)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fancy Perfume Bottle" (https://sketchfab.com/3d-models/fancy-perfume-bottle-bde185bddefc4016b13021da5d1269ec) by Jamie McFarlane (https://sketchfab.com/jamiemcfarlane) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
